@@ -1,0 +1,44 @@
+.authorization-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.authorization {
+  padding-top: 50px;
+  display: flex;
+  align-items: center;
+
+  &__image {
+    margin-right: 50px;
+  }
+
+  &__form {
+    min-width: 365px;
+  }
+
+  @media (max-width: 850px) {
+    &__image-hosp {
+      display: none;
+    }
+
+    &__image {
+      margin-right: 0;
+    }
+
+  }
+
+  @media (max-width: 600px) {
+    .authorization {
+      padding-top: 30px;
+
+      &__image-hosp {
+        display: none;
+      }
+
+      &__form {
+        min-width: auto;
+      }
+    }
+  }
+}

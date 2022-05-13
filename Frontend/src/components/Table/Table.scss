@@ -1,0 +1,153 @@
+.table-container {
+  display: flex;
+  justify-content: center;
+  padding: 0 25px 23px 25px;
+}
+
+.table {
+  width: 85%;
+  word-break: break-all;
+  text-align: center;
+  border: 1px solid #000000;
+  border-spacing: 0;
+  background-color: white;
+
+
+  &__header-heading {
+    background-color: #C4C4C4;
+  }
+
+  &__heading-item {
+    width: 20%;
+    padding: 24px 0 15px 0;
+    border-bottom: 1px solid #000000;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+  }
+
+  &__heading-item:nth-child(1),
+  &__item:nth-child(4), {
+    width: 25%;
+  }
+
+  &__row {
+    padding: 20px 10px;
+  }
+
+  &__row-item {
+    padding: 20px 0;
+  }
+
+  &__row-item:not(:last-child) {
+    border-right: 1px solid #000000;
+  }
+
+  &__row-heading {
+    display: none;
+  }
+
+  &__td-name {
+    padding: 10px 10px;
+    word-wrap: break-word;
+  }
+
+  &__td-complaint {
+    padding: 10px 10px;
+    word-wrap: break-word;
+  }
+
+  &__btn {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+  }
+
+  .table__edit-btn {
+    margin-left: 20px;
+  }
+
+  svg:hover #deleteButton {
+    fill: red;
+  }
+
+  svg:hover #editButton {
+    fill: green;
+  }
+
+}
+
+
+@media (max-width: 1300px) {
+  .table {
+    width: 100%;
+  }
+}
+
+
+@media (max-width: 570px) {
+  .table {
+    border: none;
+    background-color: revert;
+
+    &__header {
+      display: none;
+    }
+
+    &__row {
+      display: flex;
+      padding-top: 15px;
+      margin-bottom: 10px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid black;
+      border-radius: 4px;
+      background-color: #e5f5ff;
+    }
+    &__row-item:not(:last-child) {
+      border: none;
+    }
+
+    &__row-heading {
+      display: block;
+      color: #138300;
+      font-style: italic;
+    }
+
+    &__item {
+      border: none;
+    }
+
+    &__item-btn {
+      border: none
+    }
+
+    .table__edit-btn  {
+      margin-left: 55px;
+    }
+
+    &__heading {
+      display: block;
+      font-style: italic;
+      color: #3b8b3e;
+    }
+
+    &__btn {
+      width: 40px;
+      height: 40px;
+    }
+
+    svg #deleteButton {
+      fill: red;
+    }
+
+    svg #editButton {
+      fill: green;
+    }
+
+  }
+}
+
+

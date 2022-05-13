@@ -1,0 +1,49 @@
+.container {
+    display: flex;
+    width: 74%;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.filter__hide {
+    display: flex;
+
+    padding-right: 10px;
+    align-items: center;
+    justify-content: end;
+}
+
+.filter__show {
+    display: flex;
+    flex-direction: column;
+}
+
+.useOnline {
+    width: 30vw;
+    height: 30vh;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    border: 1px solid #67b9ff;
+    border-radius: 30px;
+    background-color: #67b9ff;
+    color: #657662;
+    line-height: 2em;
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    transform: translateX(-50%);
+}
+
+
+@media (max-width: 1350px) {
+    .container {
+        width: 100%;
+    }
+}
+
+@media (max-width: 690px) {
+    .filter__hide {
+        flex-direction: column;
+    }
+}

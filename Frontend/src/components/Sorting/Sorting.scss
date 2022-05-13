@@ -1,0 +1,28 @@
+.sort {
+
+  &__select-description-incr {
+    width: 200px;
+    height: 40px;
+    margin-left: 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    background-color: white;
+  }
+}
+
+@media (max-width: 1300px) {
+  .sort {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 660px) {
+  .sort {
+    flex-direction: column;
+    justify-content: center;
+
+    &__select-description-incr {
+      margin-top: 10px;
+    }
+  }
+}

@@ -1,0 +1,54 @@
+.filter {
+
+  &__add {
+    display: flex;
+    align-items: center;
+  }
+
+  &__add-description {
+    margin-right: 10px;
+  }
+
+  &__add-button {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-image: url("../../icons/filterAdd.svg");
+  background-repeat: no-repeat;
+  cursor: pointer;
+  }
+
+  &__enable {
+    display: flex;
+    padding: 0 20px 20px 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__enable-item:not(:last-child) {
+    margin-right: 20px;
+  }
+
+  &__item-input {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  &__delete-button {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+  }
+
+  svg:hover #deleteButton {
+    fill: red;
+  }
+}
+
+
+

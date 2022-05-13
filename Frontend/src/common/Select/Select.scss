@@ -1,0 +1,26 @@
+.select {
+  height: 40px;
+  padding-left: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  font-size: 18px;
+  color: black;
+  background-color: white;
+  cursor: pointer;
+
+  &__description {
+    padding: 15px 0 7px;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+
+}
+
+.select-add-border-red {
+  border: 1px solid red;
+}

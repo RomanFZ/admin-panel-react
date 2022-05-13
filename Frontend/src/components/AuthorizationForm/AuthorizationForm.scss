@@ -1,0 +1,47 @@
+.form {
+  display: flex;
+  padding: 30px 40px;
+  flex-direction: column;
+  border-radius: 4px;
+  background-color: #FFFFFF;
+
+  &__authorization-heading {
+    text-align: center;
+    font-weight: 300;
+    font-size: 37px;
+  }
+
+  &__authorization-warning {
+    width: 309px;
+    padding: 8px 0;
+    margin-top: -20px;
+    border-radius: 30px;
+    text-align: center;
+    font-size: 13px;
+    border: 1px solid red;
+    color: red;
+    transition: all .3s linear;
+  }
+
+  &__buttons {
+    display: flex;
+    height: 100px;
+    padding-top: 10px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: end;
+  }
+
+  @media (max-width: 600px) {
+    &__authorization-heading {
+      font-size: 30px;
+      padding-left: 0;
+    }
+
+    &__button {
+      width: auto;
+      margin-left: 0;
+    }
+  }
+}
+

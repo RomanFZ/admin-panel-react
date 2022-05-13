@@ -1,0 +1,28 @@
+.input__description {
+  padding: 15px 0 7px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+}
+
+.input__form {
+  height: 40px;
+  padding-left: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  font-size: 18px;
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.add-border-red {
+  border: 1px solid red;
+}
+
+::placeholder {
+  color: rgba(0, 0, 0, 0.2);
+  font-weight: 300;
+  font-size: 18px;
+}
