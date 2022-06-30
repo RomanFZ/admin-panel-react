@@ -16,16 +16,12 @@ import EditModalForm from "../../components/EditModalForm/EditModalForm";
 
 import "./ReceptionsPage.scss";
 import Filter from "../../components/Filter";
-import useCheckNetwork from "../../MyCustomHooks/CustomHook";
-import useAbortSession from "../../MyCustomHooks/IdleHook";
 import userActions from "../../redux/actions/userActions";
 
 const ReceptionsPage: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { receptions, selectedReception, sortBy, filterBy, isShowFilter } =
     useSelector((state: RootState) => state.receptions);
-
-  const online = useCheckNetwork();
 
   const { loading } = useSelector((state: RootState) => state.loading);
 
@@ -73,19 +69,10 @@ const ReceptionsPage: FC = () => {
     }
   };
 
-  const logout = useAbortSession(3000);
-
-  const destroySession = () => {
-    if (logout) {
-      dispatch(push("/authorization"));
-      dispatch(userActions.setLogout);
-    }
-  };
-
   useEffect(() => {
     addUrlParams();
     // destroySession();
-  }, [receptions, sortBy, filterBy, logout]);
+  }, [receptions, sortBy, filterBy]);
 
   useEffect(() => {
     getReceptions();
@@ -103,9 +90,6 @@ const ReceptionsPage: FC = () => {
     <>
       <Header title="Приёмы" withExitButton />
       <div className="container">
-        {!online && (
-          <div className="useOnline">Вы не в сети, проверьте подлючение</div>
-        )}
         <AddingReception />
         <div className={isShowFilter ? "filter__show" : "filter__hide"}>
           <Sorting />
