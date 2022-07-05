@@ -2,7 +2,7 @@
 
 # Applied technologies and libraries: 
 # Frontend: 
-    react: 17.0.2,
+    react,
     typeScript,
     redux,
     react-redux,
