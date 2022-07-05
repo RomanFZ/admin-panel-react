@@ -1,6 +1,6 @@
 # my-project-hospital-appointments
 
-# Applied technologies and libraries: 
+ Applied technologies and libraries: 
 # Frontend: 
     react,
     typeScript,
