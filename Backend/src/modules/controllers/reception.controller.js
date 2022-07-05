@@ -1,18 +1,27 @@
 const { v4: uuidv4 } = require('uuid');
-const Reception = require('../../models/receptions');
-const jwt = require('jsonwebtoken');
+const fs = require('fs');
+const path = require("path");
+
+const getReceptionsData = (id) => {
+    const dataBase = fs.readFileSync(path.resolve(__dirname,"./dbReceptions.json"), {encoding: 'utf8'});
+    const norm = JSON.parse(dataBase);
+    const findReceptionsUser = (id) => {
+        return norm.filter(item => {
+            return item.userId === id;
+        });
+    }
+    return findReceptionsUser(id);
+}
+
+const getReceptionsAll = () => {
+    const dataBase = fs.readFileSync(path.resolve(__dirname,"./dbReceptions.json"), {encoding: 'utf8'});
+   return  JSON.parse(dataBase);
+}
 
 module.exports.getReceptions = async (req, res) => {
     try {
-        console.log('пришел токен в гет запрос', req.headers['access-token']);
-        const token = req.headers['access-token'];
-        // const refreshToken = req.headers['refresh-token']
-        const userId = jwt.verify(token, process.env.TOKEN_KEY);
-        // console.log('id',userId)
-        const receptionId = userId.id;
-        const result = await Reception.find({userId: receptionId})
-        // const response = {result, token, refreshToken}
-        console.log(result);
+        const userId = req.query.userId;
+        const result = getReceptionsData(userId);
         res.send(result)
     } catch {
         res.status(400).json({ message: 'Ошибка загрузки' })
@@ -21,20 +30,13 @@ module.exports.getReceptions = async (req, res) => {
 
 module.exports.createReception = async (req, res) => {
     try {
-        req.body.id = uuidv4()
-        const {name, doctor, date, complaint, id} = req.body;
-
-        const verifyUserId = jwt.verify(req.headers['access-token'], process.env.TOKEN_KEY);
-
-        const reception = new Reception({
-            name: req.body.name, doctor: req.body.doctor, date: req.body.date, complaint: req.body.complaint, id: req.body.id, userId: verifyUserId.id
-        })
-        await reception.save().then(result => {
-            Reception.find({userId: verifyUserId.id}).then(result => {
-                res.send(result);
-            })
-          })
-
+        const idReception = uuidv4();
+        const reception = {
+            name: req.body.name, doctor: req.body.doctor, date: req.body.date, complaint: req.body.complaint, id: idReception, userId: req.body.userId
+        }
+        fs.writeFileSync(path.resolve(__dirname,"./dbReceptions.json"),  JSON.stringify([...getReceptionsAll(), reception]), { encoding: 'utf8' });
+        const result = getReceptionsData(req.body.userId);
+        res.send(result);
     } catch {
         res.status(433).json({ message: 'Ошибка записи' })
     }
@@ -42,14 +44,25 @@ module.exports.createReception = async (req, res) => {
 
 module.exports.updateReception = async (req, res) => {
     try {
-        const userIda = jwt.verify(req.headers['access-token'], process.env.TOKEN_KEY);
-        const verifyUserId = userIda.id
-        const {name, doctor, date, complaint, id} = req.body;
-        Reception.updateOne({id: id}, {name: name, doctor: doctor, date: date, complaint: complaint}).then(result => {
-            Reception.find({userId: verifyUserId}).then(result => {
-                res.send(result)
-            })
-        })
+        console.log(15, req.body.id);
+        const updateReception = {
+            name: req.body.name,
+            doctor: req.body.doctor,
+            date: req.body.date,
+            complaint: req.body.complaint,
+            id: req.body.id,
+            userId: req.body.userId
+        }
+        const deleteOldReception = (id) => {
+            const db = getReceptionsAll()
+            const reloadDataBase = db.filter(n => n.id !== id);
+            fs.writeFileSync(path.resolve(__dirname, "./dbReceptions.json"), JSON.stringify([...reloadDataBase]), {encoding: 'utf8'});
+            return reloadDataBase
+        }
+        deleteOldReception(req.body.id);
+        fs.writeFileSync(path.resolve(__dirname,"./dbReceptions.json"),  JSON.stringify([...getReceptionsAll(), updateReception]), { encoding: 'utf8' });
+        const result = getReceptionsData(req.body.userId);
+        res.send(result);
     } catch {
         res.status(400).json({ message: 'Ошибка записи' })
     }
@@ -57,13 +70,17 @@ module.exports.updateReception = async (req, res) => {
 
 module.exports.deleteReception = async (req, res) => {
     try {
-        const verifyUserId = jwt.verify(req.headers['access-token'], process.env.TOKEN_KEY);
-        Reception.deleteOne({id: req.query.id}).then(result => {
-            Reception.find({userId: verifyUserId.id}).then(result => {
-                res.send(result);
-            })
-          })
-
+        console.log(1231231231, req.query)
+        const id = req.query.id;
+        const deleteReception = (id) => {
+            const db = getReceptionsAll();
+            const reloadDataBase = db.filter(n => n.id !== id);
+            fs.writeFileSync(path.resolve(__dirname, "./dbReceptions.json"), JSON.stringify([...reloadDataBase]), {encoding: 'utf8'});
+            return reloadDataBase
+        }
+        deleteReception(id);
+        const result = getReceptionsData(req.query.userId)
+        res.send(result)
     } catch {
         res.status(400).json({ message: 'Ошибка записи' })
     }

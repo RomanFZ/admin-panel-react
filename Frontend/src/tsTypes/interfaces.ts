@@ -14,7 +14,6 @@ export interface Reception {
   complaint: string;
   id?: string;
   userId?: string;
-  token?: string;
 }
 
 export interface SelectedReception {
@@ -24,7 +23,6 @@ export interface SelectedReception {
   complaint?: string;
   id?: string;
   userId?: any;
-  token?: string;
 }
 
 export interface User {

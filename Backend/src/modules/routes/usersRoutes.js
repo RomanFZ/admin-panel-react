@@ -11,5 +11,4 @@ const {
 router.post('/createUser', createNewUser);
 router.post('/authorizationUser', authorizationUser);
 
-
 module.exports = router;

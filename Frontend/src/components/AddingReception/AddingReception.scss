@@ -5,16 +5,9 @@
     margin-top: 6px;
     padding: 10px 20px 40px 20px;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
     box-shadow: 0 4px 4px 2px rgba(0, 0, 0, 0.25);
   }
-
-  //&__form:last-child {
-  //  color: red;
-  //  border: 1px solid red;
-  //  background-color: red;
-  //  justify-content: flex-end;
-  //}
 
   &__form-block {
     position: relative;
@@ -22,11 +15,6 @@
     width: 20%;
     margin-left: 5px;
     flex-direction: column;
-  }
-
-  &__button {
-    height: 40px;
-    padding-top: 20px;
   }
 
   @media (max-width: 1000px) {

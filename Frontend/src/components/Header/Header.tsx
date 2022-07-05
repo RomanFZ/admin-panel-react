@@ -21,7 +21,7 @@ const Header = ({ title, withExitButton = false }: HeaderProps) => {
 
   const exitButton = useCallback(() => {
     dispatch(receptionsAction.setReceptions([]));
-    dispatch(userActions.setLogout);
+    localStorage.clear();
   }, [dispatch]);
 
   return (

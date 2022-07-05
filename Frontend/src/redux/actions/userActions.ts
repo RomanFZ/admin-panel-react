@@ -15,16 +15,9 @@ const setError = (error: string) => {
   };
 };
 
-const setLogout = (): any => {
-  localStorage.clear();
-  Api.clearToken();
-};
-
 const redirectToHomePage =
   (result: any) => (dispatch: ThunkDispatch<AppState, any, AnyAction>) => {
-    localStorage.setItem("token", result.token);
-    localStorage.setItem("refreshToken", result.refreshToken);
-    Api.setToken();
+    localStorage.setItem("userId", result);
     dispatch(push("/main"));
   };
 
@@ -62,7 +55,6 @@ const userActions = {
   fetchSetUserRegistration,
   fetchSetUserAuthorization,
   setError,
-  setLogout,
 };
 
 export default userActions;

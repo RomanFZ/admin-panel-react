@@ -6,7 +6,7 @@ import receptionsActions from "../../redux/actions/receptionsActions";
 import { Field, reduxForm, reset } from "redux-form";
 import {
   maxLength15,
-  minLength,
+  minLength2,
   required,
 } from "../../common/ReduxFormFields/Validate";
 
@@ -23,7 +23,8 @@ const AddingReception: FC = (props: any) => {
   );
 
   const handleSubmit = (values: any) => {
-    const receptionValue = { ...values };
+    const userId = localStorage.getItem("userId");
+    const receptionValue = { ...values, userId };
     dispatch(receptionsActions.addingReception(receptionValue));
     dispatch(reset("AddingReception"));
   };
@@ -40,7 +41,7 @@ const AddingReception: FC = (props: any) => {
             component={Input}
             title="Имя"
             id="reception-add-name"
-            validate={[required, maxLength15, minLength(2)]}
+            validate={[required, maxLength15, minLength2]}
           />
         </div>
         <div className="adding-reception__form-block">
@@ -60,7 +61,7 @@ const AddingReception: FC = (props: any) => {
             title="Дата"
             type="Date"
             id="reception-add-name"
-            validate={[required, maxLength15, minLength(2)]}
+            validate={[required, maxLength15, minLength2]}
           />
         </div>
         <div className="adding-reception__form-block">
@@ -69,7 +70,7 @@ const AddingReception: FC = (props: any) => {
             component={Input}
             title="Жалоба"
             id="reception-add-name"
-            validate={[required, maxLength15, minLength(2)]}
+            validate={[required, maxLength15, minLength2]}
           />
         </div>
         <div className="adding-reception__button">

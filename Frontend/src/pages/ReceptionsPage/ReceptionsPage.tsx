@@ -16,7 +16,6 @@ import EditModalForm from "../../components/EditModalForm/EditModalForm";
 
 import "./ReceptionsPage.scss";
 import Filter from "../../components/Filter";
-import userActions from "../../redux/actions/userActions";
 
 const ReceptionsPage: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -29,6 +28,8 @@ const ReceptionsPage: FC = () => {
     (state: any) => state.router.location.query
   );
 
+  const userId = localStorage.getItem("userId");
+
   const [modalType, setModalType] = useState<string>("");
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
 
@@ -36,12 +37,16 @@ const ReceptionsPage: FC = () => {
     setIsOpenModal(false);
   }, [setIsOpenModal]);
 
-  const getReceptions = useCallback((): void => {
-    dispatch(receptionsActions.getAllReceptions());
-  }, [dispatch]);
+  const getReceptions = useCallback(
+    (userId): void => {
+      dispatch(receptionsActions.getAllReceptions(userId));
+    },
+    [dispatch]
+  );
 
   const deleteReception = useCallback(() => {
-    dispatch(receptionsActions.deleteReception(selectedReception.id));
+    const userId = localStorage.getItem("userId");
+    dispatch(receptionsActions.deleteReception(selectedReception.id, userId));
     setIsOpenModal(false);
   }, [selectedReception.id, dispatch]);
 
@@ -71,11 +76,10 @@ const ReceptionsPage: FC = () => {
 
   useEffect(() => {
     addUrlParams();
-    // destroySession();
   }, [receptions, sortBy, filterBy]);
 
   useEffect(() => {
-    getReceptions();
+    getReceptions(userId);
     if (Object.keys(queryParams).length !== 0) {
       dispatch(receptionsActions.setSortBy(queryParams));
       dispatch(receptionsActions.setFilterBy(queryParams));
@@ -108,7 +112,7 @@ const ReceptionsPage: FC = () => {
             changeButtonText="Delete"
             title="Удалить приём"
           >
-            Вы деиствительно хотите удалить приём?
+            Вы действительно хотите удалить приём?
           </Modal>
         )}
         {modalType === "openEditModal" && (

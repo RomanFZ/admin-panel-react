@@ -7,11 +7,10 @@ const {
   updateReception,
   deleteReception,
 } = require('../controllers/reception.controller');
-const {verifyToken} = require("../controllers/token.controller");
 
-router.get('/getReceptions',verifyToken, getReceptions);
-router.post('/createReception',verifyToken, createReception);
-router.patch('/updateReception',verifyToken, updateReception);
-router.delete('/deleteReception',verifyToken, deleteReception);
+router.get('/getReceptions', getReceptions);
+router.post('/createReception', createReception);
+router.patch('/updateReception', updateReception);
+router.delete('/deleteReception', deleteReception);
 
 module.exports = router;

@@ -3,7 +3,7 @@ import { push } from "connected-react-router";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { receptionsTypes } from "../types/receprionsTypes";
 import { SortBy } from "../reducers/receptionsReducer";
-import { startLoadingShow, stopLoadingShow } from "./loaderActions";
+import { showLoader, hideLoader } from "./loaderActions";
 import { AnyAction } from "redux";
 
 import { Api } from "../../services/Api";
@@ -61,37 +61,37 @@ const setSortReceptions = (data: Reception[]) => {
   };
 };
 
-const getAllReceptions = (): ThunkAction<
-  Promise<void>,
-  AppState,
-  any,
-  AnyAction
-> => {
+const getAllReceptions = (
+  data: any
+): ThunkAction<Promise<void>, AppState, any, AnyAction> => {
   return async (dispatch: ThunkDispatch<AppState, any, AnyAction>) => {
-    dispatch(startLoadingShow()); //Todo showLoader | hideLoader
+    dispatch(showLoader());
     try {
-      const result = await Api.get(`${url}/getReceptions`);
+      const result = await Api.get(`${url}/getReceptions?userId=${data}`);
       dispatch(setReceptions(result?.data as Reception[]));
-      dispatch(stopLoadingShow());
+      dispatch(hideLoader());
     } catch (error: any) {
-      dispatch(stopLoadingShow());
+      dispatch(hideLoader());
       dispatch(push("/authorization"));
     }
   };
 };
 
 const deleteReception = (
-  id: string
+  id: string,
+  userId: string | null
 ): ThunkAction<Promise<void>, AppState, any, AnyAction> => {
   return async (dispatch: ThunkDispatch<AppState, any, AnyAction>) => {
-    dispatch(startLoadingShow());
+    dispatch(showLoader());
     try {
-      const result = await Api.delete(`${url}/deleteReception?id=${id}`);
+      const result = await Api.delete(
+        `${url}/deleteReception?id=${id}&userId=${userId}`
+      );
       dispatch(setReceptions(result?.data as Reception[]));
-      dispatch(stopLoadingShow());
+      dispatch(hideLoader());
     } catch (error: any) {
       dispatch(push("/authorization"));
-      dispatch(stopLoadingShow());
+      dispatch(hideLoader());
     }
   };
 };
@@ -100,14 +100,14 @@ const addingReception = (
   data: Reception
 ): ThunkAction<Promise<void>, AppState, any, AnyAction> => {
   return async (dispatch: ThunkDispatch<AppState, any, AnyAction>) => {
-    dispatch(startLoadingShow());
+    dispatch(showLoader());
     try {
       const result = await Api.post(`${url}/createReception`, data);
       dispatch(setReceptions(result?.data as Reception[]));
-      dispatch(stopLoadingShow());
+      dispatch(hideLoader());
     } catch (error: any) {
       dispatch(push("/authorization"));
-      dispatch(stopLoadingShow());
+      dispatch(hideLoader());
     }
   };
 };
@@ -116,14 +116,14 @@ const updateReception = (
   data: SelectedReception
 ): ThunkAction<Promise<void>, AppState, any, AnyAction> => {
   return async (dispatch: ThunkDispatch<AppState, any, AnyAction>) => {
-    dispatch(startLoadingShow());
+    dispatch(showLoader());
     try {
       const result = await Api.patch(`${url}/updateReception`, data);
       dispatch(setReceptions(result?.data as Reception[]));
-      dispatch(stopLoadingShow());
+      dispatch(hideLoader());
     } catch (error: any) {
       dispatch(push("/authorization"));
-      dispatch(stopLoadingShow());
+      dispatch(hideLoader());
     }
   };
 };

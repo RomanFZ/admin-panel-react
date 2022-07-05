@@ -1,9 +1,9 @@
 import { loaderTypes } from "../types/loaderTypes";
 
-export const startLoadingShow = () => ({
+export const showLoader = () => ({
   type: loaderTypes.START_LOADING_SHOW,
 });
 
-export const stopLoadingShow = () => ({
+export const hideLoader = () => ({
   type: loaderTypes.STOP_LOADING_SHOW,
 });
