@@ -1,4 +1,6 @@
-# my-project-hospital-appointments
+# admin-panel-react
+
+The project implemented an admin panel with user registration and record keeping of appointments with a doctor.
 
  Applied technologies and libraries: 
 # Frontend: 
