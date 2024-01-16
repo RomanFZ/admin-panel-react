@@ -2,6 +2,8 @@
 
 The project implemented an admin panel with user registration and record keeping of appointments with a doctor.
 
+Node version 14.15.1
+
  Applied technologies and libraries: 
 # Frontend: 
     react,
